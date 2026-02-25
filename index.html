@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Google OAuth + JWT Demo</h2>
+  <a href="http://localhost:3000/auth/google">
+    <button>Google ile Giriş Yap</button>
+  </a>
+  <br><br>
+  <button onclick="getProfile()">Profile Getir</button>
+  <button onclick="logout()">Logout</button>
+  <pre id="output"></pre>
+
+  <script>
+    async function getProfile() {
+      const res = await fetch("http://localhost:3000/profile", {
+        credentials: "include"
+      });
+      const data = await res.json();
+      output.textContent = JSON.stringify(data, null, 2);
+    }
+
+    async function logout() {
+      const res = await fetch("http://localhost:3000/logout", {
+        credentials: "include"
+      });
+      const text = await res.text();
+      output.textContent = text;
+    }
+  </script>
+</body>
+</html>
